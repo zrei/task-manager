@@ -1,0 +1,77 @@
+
+.header {
+	height: 130px;
+	overflow: auto;
+	margin: 0 0 0 0;
+	border-bottom: 2px solid #cfcfcf;
+	text-align: center;
+	padding-top: 1%;
+}
+
+.Footer {
+	min-height: 10%;
+	height: 10%;
+	max-height: 10%;
+	margin: 0 0 0 0;
+	border-top: 2px solid #cfcfcf;
+	padding-top: 10px;
+	padding-left: 10px;
+}
+
+.home-button {
+	clear: left;
+	float: left;
+	margin-right: 2px;
+}
+
+.task-buttons {
+	float: left;
+	margin-right: 2px;
+}
+
+.task-title {
+	text-transform: uppercase;
+}
+
+.subtaskContainer {
+	height: 600px;
+	margin: 0 0 0 0;
+	overflow-y: auto;
+	padding-left: 10px;
+	padding-top: 1%;
+}
+
+.subtask-box {
+	border: 2px solid #000000;
+	background-color: #ededed;
+	width: 80%;
+	min-height: 150px;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+	display: flex;
+  	flex-direction: column;
+  	justify-content: space-between;
+  	margin-bottom: 5px;
+}
+
+.subtask-title {
+	text-transform: capitalize;
+	text-decoration: underline;
+}
+
+.subtask-content-title {
+	text-transform: capitalize;
+}
+
+.subtask-footer {
+
+}
+
+.red-text {
+	color: #fc0317;
+}
+
+.grey-text {
+	color: #cccccc;
+}
