@@ -29,8 +29,22 @@ const Tasks = () => {
 		fetchTasks();
 	}, []);
 	
+	let tasksWithDeadline = tasks.filter(task => task.attributes.deadline != null);
+	let sortedTasks = tasksWithDeadline.sort((a, b) => new Date(...a.attributes.deadline.split('/').reverse()) - new Date(...b.attributes.deadline.split('/').reverse()));
 
-  	const taskdisplay = tasks && !loading && tasks.map( (task, index) => {
+	let tasksWithoutDeadline = tasks.filter(task => task.attributes.deadline == null);
+
+  	const withDeadlineTaskDisplay = sortedTasks && !loading && sortedTasks.map( (task, index) => {
+  		return (
+  			<TaskButton 
+  				key={index}
+  				attributes={task.attributes}
+  				numsubtasks={task.relationships.subtasks.data.length}
+  			/ >
+  		);
+  	});
+
+  	const withoutDeadlineTaskDisplay = tasksWithoutDeadline && !loading && tasksWithoutDeadline.map( (task, index) => {
   		return (
   			<TaskButton 
   				key={index}
@@ -51,7 +65,8 @@ const Tasks = () => {
 			<div className="Column-1">
 				<div className="taskList">
 					<h2>Remaining Tasks</h2>
-					{taskdisplay}
+					{withDeadlineTaskDisplay}
+					{withoutDeadlineTaskDisplay}
 				</div>
 			</div>
 			<div className="Column-2">

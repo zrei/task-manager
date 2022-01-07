@@ -35,7 +35,24 @@ const Task = () => {
 		fetchTask();
 	}, []);
 
-	const subtaskdisplay = subtasks && !loading && subtasks.map( (subtask, index) => {
+	let subtasksWithDeadline = subtasks.filter(subtask => subtask.attributes.deadline != null);
+	let sortedSubtasks = subtasksWithDeadline.sort((a, b) => new Date(...a.attributes.deadline.split('/').reverse()) - new Date(...b.attributes.deadline.split('/').reverse()));
+
+	let subtasksWithoutDeadline = subtasks.filter(subtask => subtask.attributes.deadline == null);
+
+  	const withDeadlineSubtaskDisplay = sortedSubtasks && !loading && sortedSubtasks.map( (subtask, index) => {
+  		return (
+  			<Subtask 
+  				key={index}
+  				attributes={subtask.attributes}
+  				id={subtask.id}
+  				subtasks={subtasks}
+  				setSubtasks={setSubtasks}
+  			/ >
+  		);
+  	});
+
+  	const withoutDeadlineSubtaskDisplay = subtasksWithoutDeadline && !loading && subtasksWithoutDeadline.map( (subtask, index) => {
   		return (
   			<Subtask 
   				key={index}
@@ -58,7 +75,8 @@ const Task = () => {
 			{!loading && 
 				<div className="subtaskContainer">
 					<h3>{subtasks.length} Subtasks</h3>
-					{subtaskdisplay}
+					{withDeadlineSubtaskDisplay}
+					{withoutDeadlineSubtaskDisplay}
 				</div>
 			}
 			{! loading && 
