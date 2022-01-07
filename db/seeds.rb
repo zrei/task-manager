@@ -7,41 +7,48 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 tasks = Task.create([
   { 
-    name: "Homework",
-    description: "For science class",
-    deadline: 20211228
+    name: "Task 1",
+    description: "No subtasks, just a description and a deadline.",
+    deadline: "2022-02-16"
   }, 
   { 
-    name: "PW Slides",
-    deadline: 20211231
+    name: "Task 2",
   },
   { 
-    name: "Change Peanut's Cage",
-    description: "Remember to use the new grid!" 
+    name: "Task 3",
+    deadline: "2021-12-14"
   }, 
   { 
-    name: "Cook Dinner",
-    description: "Family coming over, throw in more vegetables."
-  }, 
-  { 
-    name: "Make Jane's New Year's Present",
-    description: "She's allergic to peanuts.",
-    deadline: 20220101
-  }, 
-  { 
-    name: "Book holiday trip",
-	deadline: 20211231
+    name: "Task 4",
+    description: "Showing off the sorting.",
+    deadline: "2022-05-19"
   }
 ])
 subtasks = Subtask.create([
+  {
+    name: "A random subtask",
+    description: "An overdue subtask.",
+    deadline: "2021-12-13",
+    task: tasks.second
+  }
   { 
-    name: 'Do diagrams', 
-    deadline: 20211227,
-    task: tasks.first
+    name: "Another subtask", 
+    deadline: "2022-02-07",
+    task: tasks.second
   },
   { 
-    name: 'Do essay', 
-    description: 'Remember indentation', 
-    task: tasks.first 
+    name: "Just showing off more sorting",
+    deadline: "2022-02-07",
+    task: tasks.fourth
   },
+  {
+    name: "Middle due",
+    deadline: "2022-03-08",
+    task: tasks.fourth
+  }
+  {
+    name: "Far in the future",
+    deadline: "2022-06-27",
+    task: tasks.fourth 
+  }
 ])
