@@ -83,7 +83,16 @@ const NewTaskForm = (props) => {
 						<input type="date" name="deadline" onChange={handleChange} value={formData.deadline || ''} />
 					</label>
 				</fieldset><br />
-				<button type="submit" disabled={formData.name == undefined || formData.name == '' || submitting || (formData.deadline && PastDate(formData.deadline))|| (formData.name && tasks.reduce( (x,y) => x || (y.attributes.slug === formData.name.trim().replace(/[^a-zA-Z0-9]/g,'-')), false))}>Submit</button>
+				<button className="form-btn" type="submit" disabled={formData.name == undefined || formData.name == '' || submitting || (formData.deadline && PastDate(formData.deadline))|| (formData.name && tasks.reduce( (x,y) => x || (y.attributes.slug === formData.name.trim().replace(/[^a-zA-Z0-9]/g,'-')), false))}>Submit</button>
+				<button 
+					disabled={submitting} 
+					type="button"
+					onClick={()=>{
+						setFormData({
+							reset: true
+						})}
+					}>Clear
+				</button>
 			</form>
 		</div>
 	);

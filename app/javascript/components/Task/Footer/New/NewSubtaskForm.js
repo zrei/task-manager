@@ -86,7 +86,16 @@ const NewSubtaskForm = (props) => {
 						<input type="date" name="deadline" onChange={handleChange} value={formData.deadline || ''} />
 					</label>
 				</fieldset><br />
-				<button type="submit" disabled={formData.name == undefined || formData.name == '' || submitting || (formData.deadline && PastDate(formData.deadline))}>Submit</button>
+				<button className="form-btn" type="submit" disabled={formData.name == undefined || formData.name == '' || submitting || (formData.deadline && PastDate(formData.deadline))}>Submit</button>
+				<button 
+					disabled={submitting} 
+					type="button"
+					onClick={()=>{
+						setFormData({
+							reset: true
+						})}
+					}>Clear
+				</button>
 			</form>
 		</div>
 	);

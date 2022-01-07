@@ -12,6 +12,13 @@ const formReducer = (state, event) => {
 			deadline: event.subtask.deadline,
 		};
 	};
+	if (event.clear) {
+		return {
+			name: '',
+			description: '',
+			deadline: ''
+		}
+	}
 	return {
 		...state,
 		[event.name]: event.value
@@ -98,7 +105,32 @@ const EditSubtaskForm = (props) => {
 						<input type="date" name="deadline" onChange={handleChange} value={formData.deadline || ''} />
 					</label>
 				</fieldset><br />
-				<button type="submit" disabled={formData.name == undefined || formData.name == '' || submitting}>Submit</button>
+				<button className="form-btn" type="submit" disabled={formData.name == undefined || formData.name == '' || submitting}>Submit</button>
+				<button 
+					className="form-btn" 
+					type="button" 
+					disabled={submitting} 
+					onClick={()=>{
+						setFormData({
+							reset: true,
+							subtask: {
+								name: name,
+								description: description,
+								deadline: deadline
+							}
+						})}
+					}>Reset
+				</button>
+				<button 
+					className="form-btn"
+					type="button"
+					disabled={submitting}
+					onClick={() => {
+						setFormData({
+							clear: true
+						})
+					}}>Clear
+				</button>
 			</form>
 		</div>
 	);

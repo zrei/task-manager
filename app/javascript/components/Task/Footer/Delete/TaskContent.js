@@ -6,7 +6,7 @@ const Content = (content) => {
 	if (content) {
 		return <>{content}</>;
 	} else {
-		return <><span class="grey-text">(None)</span></>;
+		return <><span className="grey-text">(None)</span></>;
 	}
 }
 
