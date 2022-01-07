@@ -3,6 +3,7 @@ import React, { useState, useReducer } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../../Task.css';
+import PastDate from '../../../Functions/PastDate';
 
 const formReducer = (state, event) => {
 	if (event.reset) {
@@ -77,10 +78,15 @@ const NewSubtaskForm = (props) => {
 					</label><br />
 					<label>
 						Deadline<br />
+						{ (formData.deadline && PastDate(formData.deadline)) &&
+							<div className="red-text">
+								This deadline is in the past!
+							</div>
+						}
 						<input type="date" name="deadline" onChange={handleChange} value={formData.deadline || ''} />
 					</label>
 				</fieldset><br />
-				<button type="submit" disabled={formData.name == undefined || formData.name == '' || submitting}>Submit</button>
+				<button type="submit" disabled={formData.name == undefined || formData.name == '' || submitting || (formData.deadline && PastDate(formData.deadline))}>Submit</button>
 			</form>
 		</div>
 	);

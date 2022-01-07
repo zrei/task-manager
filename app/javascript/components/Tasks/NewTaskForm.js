@@ -3,6 +3,7 @@ import React, { useReducer, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Tasks.css';
+import PastDate from '../Functions/PastDate';
 
 const formReducer = (state, event) => {
 	if (event.reset) {
@@ -27,10 +28,10 @@ const NewTaskForm = (props) => {
 	const handleSubmit = event => {
 		event.preventDefault();
 		setSubmitting(true);
-		const slug = formData.name.trim().replace(/[^a-zA-Z0-9]/g,'-');
-		const url = '/task/' + slug;
 		axios.post('/api/v1/tasks', { name: formData.name, description: formData.description ? formData.description : null, deadline: formData.deadline ? formData.deadline : null })
-  		.then(() => {
+  		.then((resp) => {
+  			const slug = resp.data.data.attributes.slug;
+  			const url = '/task/' + slug;
   			navigate(url);
   		})
   		.catch( (resp) => { 
@@ -74,10 +75,15 @@ const NewTaskForm = (props) => {
 					</label><br />
 					<label>
 						Deadline<br />
+						{ (formData.deadline && PastDate(formData.deadline)) &&
+							<div className="red-text">
+								This deadline is in the past!
+							</div>
+						}
 						<input type="date" name="deadline" onChange={handleChange} value={formData.deadline || ''} />
 					</label>
 				</fieldset><br />
-				<button type="submit" disabled={formData.name == undefined || formData.name == '' || submitting || (formData.name && tasks.reduce( (x,y) => x || (y.attributes.slug === formData.name.trim().replace(/[^a-zA-Z0-9]/g,'-')), false))}>Submit</button>
+				<button type="submit" disabled={formData.name == undefined || formData.name == '' || submitting || (formData.deadline && PastDate(formData.deadline))|| (formData.name && tasks.reduce( (x,y) => x || (y.attributes.slug === formData.name.trim().replace(/[^a-zA-Z0-9]/g,'-')), false))}>Submit</button>
 			</form>
 		</div>
 	);
