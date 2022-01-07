@@ -30,7 +30,7 @@ subtasks = Subtask.create([
     description: "An overdue subtask.",
     deadline: "2021-12-13",
     task: tasks.second
-  }
+  },
   { 
     name: "Another subtask", 
     deadline: "2022-02-07",
@@ -45,7 +45,7 @@ subtasks = Subtask.create([
     name: "Middle due",
     deadline: "2022-03-08",
     task: tasks.fourth
-  }
+  },
   {
     name: "Far in the future",
     deadline: "2022-06-27",
