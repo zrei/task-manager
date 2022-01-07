@@ -11,6 +11,8 @@ const Tasks = () => {
 	const [loading, setLoading] = useState(true);
 	const [tasks, setTasks] = useState([]);
 	const [subtask, setSubtask] = useState([]);
+	const current = new Date();
+	const date = "Today's Date: " + `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
 
 	useEffect( () => {
 		const fetchTasks = async () => {
@@ -44,6 +46,7 @@ const Tasks = () => {
 			<div className="Header">
 				<div className="header-title"><h1>TASK MANAGER</h1></div>
 				<h3>You have <u>{tasks.length}</u> tasks remaining.</h3>
+				<div className="current-date"><h4>{date}</h4></div>
 			</div>
 			<div className="Column-1">
 				<div className="taskList">
