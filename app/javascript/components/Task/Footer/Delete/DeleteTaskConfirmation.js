@@ -1,7 +1,7 @@
 
 import React from 'react';
 import axios from 'axios';
-import Button from 'react-bootstrap/button';
+import Button from 'react-bootstrap/Button';
 import '../../Task.css';
 import { useNavigate } from 'react-router-dom';
 

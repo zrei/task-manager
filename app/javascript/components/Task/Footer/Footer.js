@@ -1,6 +1,6 @@
 
 import React from 'react';
-import Button from 'react-bootstrap/button';
+import Button from 'react-bootstrap/Button';
 import NewSubtaskButton from './New/NewSubtaskButton';
 import EditTaskButton from './Edit/EditTaskButton';
 import DeleteTaskButton from './Delete/DeleteTaskButton';

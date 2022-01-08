@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/button';
+import Button from 'react-bootstrap/Button';
 import Modal from 'react-modal';
 import SubtaskContent from './SubtaskContent';
 import DeleteSubtaskConfirmation from './DeleteSubtaskConfirmation';

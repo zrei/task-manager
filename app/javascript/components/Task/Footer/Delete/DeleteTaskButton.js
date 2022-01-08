@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import Modal from 'react-modal';
-import Button from 'react-bootstrap/button';
+import Button from 'react-bootstrap/Button';
 import TaskContent from './TaskContent';
 import DeleteTaskConfirmation from './DeleteTaskConfirmation';
 import '../../Task.css';

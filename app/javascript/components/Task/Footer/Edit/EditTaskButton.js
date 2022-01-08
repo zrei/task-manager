@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/button';
+import Button from 'react-bootstrap/Button';
 import Modal from 'react-modal';
 import EditTaskForm from './EditTaskForm';
 import '../../Task.css';
