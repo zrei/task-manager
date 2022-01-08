@@ -10,9 +10,9 @@ const formReducer = (state, event) => {
 		return {
 			name: '',
 			description: '',
-			deadline: '',
+			deadline: ''
 		};
-	};
+	}
 	return {
 		...state,
 		[event.name]: event.value
@@ -28,7 +28,7 @@ const NewSubtaskForm = (props) => {
 	const [formData, setFormData] = useReducer(formReducer, {});
 	const [submitting, setSubmitting] = useState(false);
 	
-	const handleSubmit = event => {
+	const handleSubmit = (event) => {
 		event.preventDefault();
 		setSubmitting(true);
 		axios.post('/api/v1/subtasks', { task_id: task_id, name: formData.name, description: formData.description ? formData.description : null, deadline: formData.deadline ? formData.deadline : null })
@@ -36,7 +36,7 @@ const NewSubtaskForm = (props) => {
   			console.log("posted data");
   			setFormData({
        			reset: true
-     		})
+     		});
   			setSubmitting(false);
   			setSubtasks([...subtasks, resp.data.data]);
   			modalAction();
@@ -48,7 +48,7 @@ const NewSubtaskForm = (props) => {
   		});
 	};
 
-	const handleChange = event => {
+	const handleChange = (event) => {
 		setFormData({
 			name: event.target.name,
 			value: event.target.value
@@ -93,7 +93,7 @@ const NewSubtaskForm = (props) => {
 					onClick={()=>{
 						setFormData({
 							reset: true
-						})}
+						});}
 					}>Clear
 				</button>
 			</form>

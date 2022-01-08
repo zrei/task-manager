@@ -12,10 +12,10 @@ const EditTaskButton = (props) => {
 	const [modalIsOpen, setModalIsOpen] = useState(false);
 	const setModalIsOpenToTrue = () => {
 		setModalIsOpen(true);
-	}
+	};
 	const setModalIsOpenToFalse = () => {
 		setModalIsOpen(false);
-	}
+	};
 	return (
 		<div className="task-buttons">
 			<Button variant="info" onClick={setModalIsOpenToTrue}>Edit Task</Button>

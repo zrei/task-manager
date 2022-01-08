@@ -8,7 +8,7 @@ const Content = (content) => {
 	} else {
 		return <><span className="grey-text">(None)</span></>;
 	}
-}
+};
 
 const SubtaskContent = (props) => {
 	const { name, description, deadline } = props.attributes;

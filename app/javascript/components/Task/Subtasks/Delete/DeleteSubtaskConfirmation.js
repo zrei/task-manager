@@ -22,7 +22,7 @@ const DeleteSubtaskConfirmation = (props) => {
 	      	navigate('/error');
 	    });	
 	    modalAction();
-	}
+	};
 	return (
 		<div className="task-buttons">
 			<Button variant="danger" onClick={confirmAction}>Confirm</Button>

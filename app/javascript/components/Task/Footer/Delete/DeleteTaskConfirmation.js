@@ -18,7 +18,7 @@ const DeleteTaskConfirmation = (props) => {
 	      	console.log(resp);
 	      	navigate('/error');
 	    });	
-	}
+	};
 	return (
 		<div className="task-buttons">
 			<Button variant="danger" onClick={confirmAction}>Confirm</Button>

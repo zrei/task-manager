@@ -13,10 +13,10 @@ const NewSubtaskButton = (props) => {
 	const [modalIsOpen, setModalIsOpen] = useState(false);
 	const setModalIsOpenToTrue = () => {
 		setModalIsOpen(true);
-	}
+	};
 	const setModalIsOpenToFalse = () => {
 		setModalIsOpen(false);
-	}
+	};
 	return (
 		<div className="task-buttons">
 			<Button variant="primary" onClick={setModalIsOpenToTrue}>+ Subtask</Button>

@@ -9,15 +9,15 @@ const formReducer = (state, event) => {
 		return {
 			name: event.subtask.name,
 			description: event.subtask.description,
-			deadline: event.subtask.deadline,
+			deadline: event.subtask.deadline
 		};
-	};
+	}
 	if (event.clear) {
 		return {
 			name: '',
 			description: '',
 			deadline: ''
-		}
+		};
 	}
 	return {
 		...state,
@@ -29,7 +29,7 @@ const EditSubtaskForm = (props) => {
 	let navigate = useNavigate();
 	const subtasks = props.subtasks;
 	const setSubtasks = props.setSubtasks;
-	const { name, description, deadline, task_id } = props.attributes;
+	const { name, description, deadline } = props.attributes;
 	const id = props.id;
 	const modalAction = props.modalAction;
 	const [formData, setFormData] = useReducer(formReducer, {
@@ -39,7 +39,7 @@ const EditSubtaskForm = (props) => {
 	});
 	const [submitting, setSubmitting] = useState(false);
 	
-	const handleSubmit = event => {
+	const handleSubmit = (event) => {
 		event.preventDefault();
 		setSubmitting(true);
 		const url = "/api/v1/subtasks/" + id;
@@ -72,7 +72,7 @@ const EditSubtaskForm = (props) => {
 		});
 	};
 
-	const handleChange = event => {
+	const handleChange = (event) => {
 		setFormData({
 			name: event.target.name,
 			value: event.target.value
@@ -118,7 +118,7 @@ const EditSubtaskForm = (props) => {
 								description: description,
 								deadline: deadline
 							}
-						})}
+						});}
 					}>Reset
 				</button>
 				<button 
@@ -128,7 +128,7 @@ const EditSubtaskForm = (props) => {
 					onClick={() => {
 						setFormData({
 							clear: true
-						})
+						});
 					}}>Clear
 				</button>
 			</form>

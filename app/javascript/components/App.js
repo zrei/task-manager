@@ -1,6 +1,6 @@
 
 import React from 'react';
-import {BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Task from './Task/Task';
 import Tasks from './Tasks/Tasks';
 import NotFound from './Functions/NotFound';

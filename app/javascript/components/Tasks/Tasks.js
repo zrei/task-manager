@@ -10,7 +10,6 @@ const Tasks = () => {
 	let navigate = useNavigate();
 	const [loading, setLoading] = useState(true);
 	const [tasks, setTasks] = useState([]);
-	const [subtask, setSubtask] = useState([]);
 	const current = new Date();
 	const date = "Today's Date: " + `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
 
@@ -18,14 +17,14 @@ const Tasks = () => {
 		const fetchTasks = async () => {
 			setLoading(true);
 			try {
-				const {data: response} = await axios.get('/api/v1/tasks.json');
+				const {data: response} = await axios.get('/api/v1/tasks');
 				setTasks(response.data);
 			} catch (error) {
 				console.error(error.message);
 				navigate('/error');
 			}
 			setLoading(false);
-		}
+		};
 		fetchTasks();
 	}, []);
 	

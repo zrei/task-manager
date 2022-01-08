@@ -9,7 +9,7 @@ import PastDate from '../Functions/PastDate';
 
 const TaskButton = (props) => {
 	let navigate = useNavigate();
-	const {name, deadline, slug} = props.attributes;
+	const { name, deadline, slug } = props.attributes;
 	let namechange = name;
 	const url = "/task/" + slug;
 	if (deadline != null && PastDate(deadline)) {

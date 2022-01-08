@@ -14,10 +14,10 @@ const DeleteSubtaskButton = (props) => {
 	const [modalIsOpen, setModalIsOpen] = useState(false);
 	const setModalIsOpenToTrue = () => {
 		setModalIsOpen(true);
-	}
+	};
 	const setModalIsOpenToFalse = () => {
 		setModalIsOpen(false);
-	}
+	};
 	return (
 		<div className="task-buttons">
 			<Button variant="danger" onClick={setModalIsOpenToTrue}>Delete Subtask</Button>
@@ -28,6 +28,6 @@ const DeleteSubtaskButton = (props) => {
 			</Modal>
 		</div>
 	);
-}
+};
 
 export default DeleteSubtaskButton;

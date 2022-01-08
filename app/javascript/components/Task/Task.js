@@ -31,7 +31,7 @@ const Task = () => {
 				navigate('/error');
 			}
 			setLoading(false);
-		}
+		};
 		fetchTask();
 	}, []);
 

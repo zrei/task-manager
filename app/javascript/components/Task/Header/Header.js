@@ -6,7 +6,7 @@ import Description from './Description';
 import PastDate from '../../Functions/PastDate';
 
 const Header = (props) => {
-	const {name, description, deadline} = props.attributes;
+	const { name, description, deadline } = props.attributes;
 	let namechange = name;
 	if (deadline != null && PastDate(deadline)) {
 		namechange += " (overdue)";
@@ -18,6 +18,6 @@ const Header = (props) => {
 			{description != null && <Description description={description}/>}
 		</div>
 	);
-}
+};
 
 export default Header;

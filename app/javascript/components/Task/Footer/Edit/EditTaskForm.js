@@ -17,7 +17,7 @@ const formReducer = (state, event) => {
 			name: '',
 			description: '',
 			deadline: ''
-		}
+		};
 	}
 	return {
 		...state,
@@ -26,7 +26,7 @@ const formReducer = (state, event) => {
 };
 
 const EditTaskForm = (props) => {
-	let navigate = useNavigate;
+	let navigate = useNavigate();
 	const task = props.task;
 	const setTask = props.setTask;
 	const modalAction = props.modalAction;
@@ -37,7 +37,7 @@ const EditTaskForm = (props) => {
 	});
 	const [submitting, setSubmitting] = useState(false);
 	
-	const handleSubmit = event => {
+	const handleSubmit = (event) => {
 		event.preventDefault();
 		setSubmitting(true);
 		const slug = task.attributes.slug;
@@ -63,7 +63,7 @@ const EditTaskForm = (props) => {
 		});
 	};
 
-	const handleChange = event => {
+	const handleChange = (event) => {
 		setFormData({
 			name: event.target.name,
 			value: event.target.value
@@ -109,7 +109,7 @@ const EditTaskForm = (props) => {
 								description: task.attributes.description,
 								deadline: task.attributes.deadline
 							}
-						})}
+						});}
 					}>Reset
 				</button>
 				<button 
@@ -119,7 +119,7 @@ const EditTaskForm = (props) => {
 					onClick={() => {
 						setFormData({
 							clear: true
-						})
+						});
 					}}>Clear
 				</button>
 			</form>
