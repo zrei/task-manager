@@ -16,9 +16,16 @@ const TaskContent = (props) => {
 		<div>
 			Do you <i>really</i> want to <span className="red-text">delete</span> this task?
 			<ul>
-				<li><b>Task name:</b> <span className="subtask-content-title">{name}</span></li>
-				<li><b>Description:</b> {Content(description)}</li>
-				<li><b>Deadline:</b> {Content(deadline)}</li>
+				<li>
+					<b>Task name:</b>{" "} 
+					<span className="subtask-content-title">{name}</span>
+				</li>
+				<li>
+					<b>Description:</b> {Content(description)}
+				</li>
+				<li>
+					<b>Deadline:</b> {Content(deadline)}
+				</li>
 			</ul>
 		</div>
 	);

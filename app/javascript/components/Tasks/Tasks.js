@@ -11,13 +11,13 @@ const Tasks = () => {
 	const [loading, setLoading] = useState(true);
 	const [tasks, setTasks] = useState([]);
 	const current = new Date();
-	const date = "Today's Date: " + `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+	const date = "Today's Date: " + `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
 
-	useEffect( () => {
+	useEffect(() => {
 		const fetchTasks = async () => {
 			setLoading(true);
 			try {
-				const {data: response} = await axios.get('/api/v1/tasks');
+				const { data: response} = await axios.get('/api/v1/tasks');
 				setTasks(response.data);
 			} catch (error) {
 				console.error(error.message);
@@ -28,38 +28,57 @@ const Tasks = () => {
 		fetchTasks();
 	}, []);
 	
-	let tasksWithDeadline = tasks.filter(task => task.attributes.deadline != null);
-	let sortedTasks = tasksWithDeadline.sort((a, b) => new Date(...a.attributes.deadline.split('/').reverse()) - new Date(...b.attributes.deadline.split('/').reverse()));
+	let tasksWithDeadline = tasks.filter(
+		(task) => task.attributes.deadline != null
+	);
+	let sortedTasks = tasksWithDeadline.sort(
+		(a, b) => 
+			new Date(...a.attributes.deadline.split('/').reverse()) - new Date(...b.attributes.deadline.split('/').reverse())
+	);
 
-	let tasksWithoutDeadline = tasks.filter(task => task.attributes.deadline == null);
+	let tasksWithoutDeadline = tasks.filter(
+		(task) => task.attributes.deadline == null
+	);
 
-  	const withDeadlineTaskDisplay = sortedTasks && !loading && sortedTasks.map( (task, index) => {
-  		return (
-  			<TaskButton 
-  				key={index}
-  				attributes={task.attributes}
-  				numsubtasks={task.relationships.subtasks.data.length}
-  			/ >
-  		);
+  	const withDeadlineTaskDisplay = 
+  		sortedTasks && 
+  		!loading && 
+  		sortedTasks.map((task, index) => {
+	  		return (
+	  			<TaskButton 
+	  				key={index}
+	  				attributes={task.attributes}
+	  				numsubtasks={task.relationships.subtasks.data.length}
+	  			/>
+	  		);
   	});
 
-  	const withoutDeadlineTaskDisplay = tasksWithoutDeadline && !loading && tasksWithoutDeadline.map( (task, index) => {
-  		return (
-  			<TaskButton 
-  				key={index}
-  				attributes={task.attributes}
-  				numsubtasks={task.relationships.subtasks.data.length}
-  			/ >
-  		);
+  	const withoutDeadlineTaskDisplay = 
+  		tasksWithoutDeadline && 
+  		!loading && 
+  		tasksWithoutDeadline.map((task, index) => {
+	  		return (
+	  			<TaskButton 
+	  				key={index}
+	  				attributes={task.attributes}
+	  				numsubtasks={task.relationships.subtasks.data.length}
+	  			/>
+	  		);
   	});
 
 
 	return (
 		<div>
 			<div className="Header">
-				<div className="header-title"><h1>TASK MANAGER</h1></div>
-				<h3>You have <u>{tasks.length}</u> tasks remaining.</h3>
-				<div className="current-date"><h4>{date}</h4></div>
+				<div className="header-title">
+					<h1>TASK MANAGER</h1>
+				</div>
+				<h3>
+					You have <u>{tasks.length}</u> tasks remaining.
+				</h3>
+				<div className="current-date">
+					<h4>{date}</h4>
+				</div>
 			</div>
 			<div className="Column-1">
 				<div className="taskList">
@@ -69,7 +88,7 @@ const Tasks = () => {
 				</div>
 			</div>
 			<div className="Column-2">
-				<NewTaskForm tasks={tasks}/>
+				<NewTaskForm tasks={tasks} />
 			</div>
 		</div>
 	);

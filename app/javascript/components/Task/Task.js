@@ -16,11 +16,11 @@ const Task = () => {
 	const { slug } = useParams();
 	const url = '/api/v1/tasks/' + slug;
 	
-	useEffect( () => {	
+	useEffect(() => {	
 		const fetchTask = async () => {
 			setLoading(true);
 			try {
-				const {data: response} = await axios.get(url);
+				const { data: response } = await axios.get(url);
 				if (response.data == null) {
 					navigate('/notfound');
 				}
@@ -35,53 +35,68 @@ const Task = () => {
 		fetchTask();
 	}, []);
 
-	let subtasksWithDeadline = subtasks.filter(subtask => subtask.attributes.deadline != null);
-	let sortedSubtasks = subtasksWithDeadline.sort((a, b) => new Date(...a.attributes.deadline.split('/').reverse()) - new Date(...b.attributes.deadline.split('/').reverse()));
+	let subtasksWithDeadline = subtasks.filter(
+		(subtask) => subtask.attributes.deadline != null
+	);
+	let sortedSubtasks = subtasksWithDeadline.sort(
+		(a, b) => 
+			new Date(...a.attributes.deadline.split('/').reverse()) - new Date(...b.attributes.deadline.split('/').reverse())
+	);
 
-	let subtasksWithoutDeadline = subtasks.filter(subtask => subtask.attributes.deadline == null);
+	let subtasksWithoutDeadline = subtasks.filter(
+		(subtask) => subtask.attributes.deadline == null
+	);
 
-  	const withDeadlineSubtaskDisplay = sortedSubtasks && !loading && sortedSubtasks.map( (subtask, index) => {
-  		return (
-  			<Subtask 
-  				key={index}
-  				attributes={subtask.attributes}
-  				id={subtask.id}
-  				subtasks={subtasks}
-  				setSubtasks={setSubtasks}
-  			/ >
-  		);
-  	});
+  	const withDeadlineSubtaskDisplay = 
+  		sortedSubtasks && 
+  		!loading && 
+  		sortedSubtasks.map((subtask, index) => {
+  			return (
+	  			<Subtask 
+	  				key={index}
+	  				attributes={subtask.attributes}
+	  				id={subtask.id}
+	  				subtasks={subtasks}
+	  				setSubtasks={setSubtasks}
+	  			/>
+  			);
+  		});
 
-  	const withoutDeadlineSubtaskDisplay = subtasksWithoutDeadline && !loading && subtasksWithoutDeadline.map( (subtask, index) => {
-  		return (
-  			<Subtask 
-  				key={index}
-  				attributes={subtask.attributes}
-  				id={subtask.id}
-  				subtasks={subtasks}
-  				setSubtasks={setSubtasks}
-  			/ >
-  		);
-  	});
+  	const withoutDeadlineSubtaskDisplay = 
+  		subtasksWithoutDeadline && 
+  		!loading && 
+  		subtasksWithoutDeadline.map((subtask, index) => {
+	  		return (
+	  			<Subtask 
+	  				key={index}
+	  				attributes={subtask.attributes}
+	  				id={subtask.id}
+	  				subtasks={subtasks}
+	  				setSubtasks={setSubtasks}
+	  			/>
+	  		);
+	  	});
 
 	return (
 		<div className="subtask-page">
-			{loading &&
-				<Loading />
-			}
-			{!loading &&
-				<Header attributes={task.attributes} />
-			}
-			{!loading && 
+			{loading && <Loading />}
+			{!loading && <Header attributes={task.attributes} />}
+			{!loading && (
 				<div className="subtaskContainer">
 					<h3>{subtasks.length} Subtasks</h3>
 					{withDeadlineSubtaskDisplay}
 					{withoutDeadlineSubtaskDisplay}
 				</div>
-			}
-			{! loading && 
-				<Footer task_id={task.id} subtasks={subtasks} setSubtasks={setSubtasks} task={task} setTask={setTask}/>
-			}
+			)}
+			{! loading && (
+				<Footer 
+					task_id={task.id} 
+					subtasks={subtasks} 
+					setSubtasks={setSubtasks} 
+					task={task} 
+					setTask={setTask}
+				/>
+			)}
 		</div>
 	);
 };

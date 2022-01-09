@@ -10,18 +10,21 @@ const DeleteTaskConfirmation = (props) => {
 	const url = "/api/v1/tasks/" + slug;
 	let navigate = useNavigate();
 	const confirmAction = () => {
-		axios.delete(url)
-	    .then( () => {
-	      	navigate('/');
-	     })
-	    .catch( (resp) => {
-	      	console.log(resp);
-	      	navigate('/error');
-	    });	
+		axios
+			.delete(url)
+	    	.then(() => {
+	      		navigate('/');
+	     	})
+	    	.catch((resp) => {
+	      		console.log(resp);
+	      		navigate('/error');
+	    	});	
 	};
 	return (
 		<div className="task-buttons">
-			<Button variant="danger" onClick={confirmAction}>Confirm</Button>
+			<Button variant="danger" onClick={confirmAction}>
+				Confirm
+			</Button>
 		</div>
 	);
 };

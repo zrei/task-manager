@@ -1,6 +1,6 @@
 
 import React from 'react';
-import '../Task.css'
+import '../Task.css';
 
 const Description = (props) => {
 	const description = props.description;

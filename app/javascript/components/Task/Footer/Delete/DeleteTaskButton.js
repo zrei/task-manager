@@ -17,11 +17,19 @@ const DeleteTaskButton = (props) => {
 	};
 	return (
 		<div className="task-buttons">
-			<Button variant="danger" onClick={setModalIsOpenToTrue}>Delete Task</Button>
+			<Button variant="danger" onClick={setModalIsOpenToTrue}>
+				Delete Task
+			</Button>
 			<Modal isOpen={modalIsOpen}>
-				<TaskContent attributes={props.attributes}/>
-				<Button variant="primary" onClick={setModalIsOpenToFalse} className="task-buttons">Cancel</Button>
-				<DeleteTaskConfirmation slug={props.attributes.slug}/>
+				<TaskContent attributes={props.attributes} />
+				<Button 
+					variant="primary" 
+					onClick={setModalIsOpenToFalse} 
+					className="task-buttons"
+				>
+					Cancel
+				</Button>
+				<DeleteTaskConfirmation slug={props.attributes.slug} />
 			</Modal>
 		</div>
 	);

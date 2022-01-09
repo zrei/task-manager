@@ -10,7 +10,9 @@ const ErrorPage = () => {
 		<div className="error-box">
 			<h1>Oops!</h1>
 			<p>Something went wrong.</p>
-			<Button variant="primary" onClick={() => navigate('/')}>Home</Button>
+			<Button variant="primary" onClick={() => navigate('/')}>
+				Home
+			</Button>
 		</div>
 	);
 };

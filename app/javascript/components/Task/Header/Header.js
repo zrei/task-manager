@@ -13,9 +13,11 @@ const Header = (props) => {
 	}
 	return (
 		<div className="header">
-			<div className="task-title"><h1>{namechange}</h1></div>
-			{deadline != null && <Deadline deadline={deadline}/>}
-			{description != null && <Description description={description}/>}
+			<div className="task-title">
+				<h1>{namechange}</h1>
+			</div>
+			{deadline != null && <Deadline deadline={deadline} />}
+			{description != null && <Description description={description} />}
 		</div>
 	);
 };

@@ -18,10 +18,18 @@ const EditTaskButton = (props) => {
 	};
 	return (
 		<div className="task-buttons">
-			<Button variant="info" onClick={setModalIsOpenToTrue}>Edit Task</Button>
+			<Button variant="info" onClick={setModalIsOpenToTrue}>
+				Edit Task
+			</Button>
 			<Modal isOpen={modalIsOpen}>
-				<Button variant="primary" onClick={setModalIsOpenToFalse}>Close</Button>
-				<EditTaskForm modalAction={setModalIsOpenToFalse} task={task} setTask={setTask}/>
+				<Button variant="primary" onClick={setModalIsOpenToFalse}>
+					Close
+				</Button>
+				<EditTaskForm 
+					modalAction={setModalIsOpenToFalse} 
+					task={task} 
+					setTask={setTask}
+				/>
 			</Modal>
 		</div>
 	);

@@ -13,19 +13,22 @@ const DeleteSubtaskConfirmation = (props) => {
 	const modalAction = props.modalAction;
 	let navigate = useNavigate();
 	const confirmAction = () => {
-		axios.delete(url)
-	    .then( () => {
-	      	setSubtasks(subtasks.filter( subtask => subtask.id != id));
-	     })
-	    .catch( (resp) => {
-	      	console.log(resp);
-	      	navigate('/error');
-	    });	
+		axios
+			.delete(url)
+		    .then(() => {
+		      	setSubtasks(subtasks.filter((subtask) => subtask.id !== id));
+		     })
+		    .catch((resp) => {
+		      	console.log(resp);
+		      	navigate('/error');
+		    });	
 	    modalAction();
 	};
 	return (
 		<div className="task-buttons">
-			<Button variant="danger" onClick={confirmAction}>Confirm</Button>
+			<Button variant="danger" onClick={confirmAction}>
+				Confirm
+			</Button>
 		</div>
 	);
 };

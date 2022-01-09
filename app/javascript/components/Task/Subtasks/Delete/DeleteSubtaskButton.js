@@ -20,11 +20,24 @@ const DeleteSubtaskButton = (props) => {
 	};
 	return (
 		<div className="task-buttons">
-			<Button variant="danger" onClick={setModalIsOpenToTrue}>Delete Subtask</Button>
+			<Button variant="danger" onClick={setModalIsOpenToTrue}>
+				Delete Subtask
+			</Button>
 			<Modal isOpen={modalIsOpen}>
-				<SubtaskContent attributes={props.attributes}/>
-				<Button variant="primary" onClick={setModalIsOpenToFalse} className="task-buttons">Cancel</Button>
-				<DeleteSubtaskConfirmation modalAction={setModalIsOpenToFalse} id={id} subtasks={subtasks} setSubtasks={setSubtasks}/>
+				<SubtaskContent attributes={props.attributes} />
+				<Button 
+					variant="primary" 
+					onClick={setModalIsOpenToFalse} 
+					className="task-buttons"
+				>
+					Cancel
+				</Button>
+				<DeleteSubtaskConfirmation 
+					modalAction={setModalIsOpenToFalse} 
+					id={id} 
+					subtasks={subtasks} 
+					setSubtasks={setSubtasks}
+				/>
 			</Modal>
 		</div>
 	);

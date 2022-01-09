@@ -43,33 +43,39 @@ const EditSubtaskForm = (props) => {
 		event.preventDefault();
 		setSubmitting(true);
 		const url = "/api/v1/subtasks/" + id;
-		axios.patch(url, {name: formData.name, description: formData.description ? formData.description : null, deadline: formData.deadline ? formData.deadline : null})
-		.then( (resp) => {
-			console.log("edit submitted");
-			console.log(resp);
-			setSubtasks(subtasks.map( (subtask) => {
-				if (subtask.id == id) {
-					return resp.data.data;
-				}
-				else {
-					return subtask;
-				}
-			}));
-			setSubmitting(false);
-			modalAction();
-			setFormData({
-       			reset: true,
-       			subtask: {
-       				name: formData.name,
-       				description: formData.description,
-       				deadline: formData.deadline
-       			}
-     		});
-		})
-		.catch( (resp) => {
-			console.log(resp);
-			navigate('/error');
-		});
+		axios
+			.patch(url, {
+				name: formData.name, 
+				description: formData.description ? formData.description : null, 
+				deadline: formData.deadline ? formData.deadline : null
+			})
+			.then((resp) => {
+				console.log("edit submitted");
+				console.log(resp);
+				setSubtasks(
+					subtasks.map((subtask) => {
+						if (subtask.id === id) {
+							return resp.data.data;
+						} else {
+							return subtask;
+						}
+					})
+				);
+				setSubmitting(false);
+				modalAction();
+				setFormData({
+	       			reset: true,
+	       			subtask: {
+	       				name: formData.name,
+	       				description: formData.description,
+	       				deadline: formData.deadline
+	       			}
+	     		});
+			})
+			.catch((resp) => {
+				console.log(resp);
+				navigate('/error');
+			});
 	};
 
 	const handleChange = (event) => {
@@ -82,30 +88,59 @@ const EditSubtaskForm = (props) => {
 	return (
 		<div>
 			<h1>Edit Subtask</h1>
-			<p>A <span className="red-text">*</span> indicates compulsory fields that must be filled in before the form can be submitted.</p>
-			{submitting && 
-				<div>
-         			Submitting...
-       			</div>
-         	}
+			<p>
+				A <span className="red-text">*</span> indicates compulsory fields that must be filled in before the form can be submitted.
+			</p>
+			{submitting && <div>Submitting...</div>}
 			<form onSubmit={handleSubmit}>
 				<fieldset disabled={submitting}>
 					<label>
-						Name <span className="red-text">*</span><br />
-						<input name="name" onChange={handleChange} value={formData.name || ''} />
+						Name <span className="red-text">*</span>
+						<br />
+						<input 
+							name="name" 
+							onChange={handleChange} 
+							value={formData.name || ''} 
+						/>
 					</label>
-				</fieldset><br />
-				<fieldset disabled={formData.name == undefined || formData.name == '' || submitting}>
+				</fieldset>
+				<br />
+				<fieldset 
+					disabled={
+						formData.name === undefined || formData.name === '' || submitting
+					}
+				>
 					<label>
-						Description<br />
-						<textarea name="description" onChange={handleChange} value={formData.description || ''} />
-					</label><br />
-					<label>
-						Deadline<br />
-						<input type="date" name="deadline" onChange={handleChange} value={formData.deadline || ''} />
+						Description
+						<br />
+						<textarea 
+							name="description" 
+							onChange={handleChange} 
+							value={formData.description || ''} 
+						/>
 					</label>
-				</fieldset><br />
-				<button className="form-btn" type="submit" disabled={formData.name == undefined || formData.name == '' || submitting}>Submit</button>
+					<br />
+					<label>
+						Deadline
+						<br />
+						<input 
+							type="date" 
+							name="deadline" 
+							onChange={handleChange} 
+							value={formData.deadline || ''} 
+						/>
+					</label>
+				</fieldset>
+				<br />
+				<button 
+					className="form-btn" 
+					type="submit" 
+					disabled={
+						formData.name === undefined || formData.name === '' || submitting
+					}
+				>
+					Submit
+				</button>
 				<button 
 					className="form-btn" 
 					type="button" 
@@ -118,8 +153,10 @@ const EditSubtaskForm = (props) => {
 								description: description,
 								deadline: deadline
 							}
-						});}
-					}>Reset
+						});
+					}}
+				>
+					Reset
 				</button>
 				<button 
 					className="form-btn"
@@ -129,7 +166,9 @@ const EditSubtaskForm = (props) => {
 						setFormData({
 							clear: true
 						});
-					}}>Clear
+					}}
+				>
+					Clear
 				</button>
 			</form>
 		</div>

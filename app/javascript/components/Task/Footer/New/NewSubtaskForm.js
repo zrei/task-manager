@@ -31,21 +31,26 @@ const NewSubtaskForm = (props) => {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		setSubmitting(true);
-		axios.post('/api/v1/subtasks', { task_id: task_id, name: formData.name, description: formData.description ? formData.description : null, deadline: formData.deadline ? formData.deadline : null })
-  		.then( (resp) => {
-  			console.log("posted data");
-  			setFormData({
-       			reset: true
-     		});
-  			setSubmitting(false);
-  			setSubtasks([...subtasks, resp.data.data]);
-  			modalAction();
-			}
-		)
-  		.catch( (resp) => {
-  			console.log(resp);
-  			navigate('/error');
-  		});
+		axios
+			.post('/api/v1/subtasks', {
+				task_id: task_id, 
+				name: formData.name, 
+				description: formData.description ? formData.description : null, 
+				deadline: formData.deadline ? formData.deadline : null 
+			})
+  			.then((resp) => {
+  				console.log("posted data");
+	  			setFormData({
+	       			reset: true
+	     		});
+	  			setSubmitting(false);
+	  			setSubtasks([...subtasks, resp.data.data]);
+	  			modalAction();
+			})
+	  		.catch((resp) => {
+	  			console.log(resp);
+	  			navigate('/error');
+	  		});
 	};
 
 	const handleChange = (event) => {
@@ -58,43 +63,75 @@ const NewSubtaskForm = (props) => {
 	return (
 		<div>
 			<h1>Create a new subtask</h1>
-			<p>A <span className="red-text">*</span> indicates compulsory fields that must be filled in before the form can be submitted.</p>
-			{submitting && 
-				<div>
-         			Submitting...
-       			</div>
-         	}
+			<p>
+				A <span className="red-text">*</span> indicates compulsory fields that must be filled in before the form can be submitted.
+			</p>
+			{submitting && <div>Submitting...</div>}
 			<form onSubmit={handleSubmit}>
 				<fieldset disabled={submitting}>
 					<label>
-						Name <span className="red-text">*</span><br />
-						<input name="name" onChange={handleChange} value={formData.name || ''} />
+						Name <span className="red-text">*</span>
+						<br />
+						<input 
+							name="name" 
+							onChange={handleChange} 
+							value={formData.name || ''} 
+						/>
 					</label>
-				</fieldset><br />
-				<fieldset disabled={formData.name == undefined || formData.name == '' || submitting}>
+				</fieldset>
+				<br />
+				<fieldset 
+					disabled={
+						formData.name === undefined || formData.name === '' || submitting
+					}
+				>
 					<label>
-						Description<br />
-						<textarea name="description" onChange={handleChange} value={formData.description || ''} />
-					</label><br />
-					<label>
-						Deadline<br />
-						{ (formData.deadline && PastDate(formData.deadline)) &&
-							<div className="red-text">
-								This deadline is in the past!
-							</div>
-						}
-						<input type="date" name="deadline" onChange={handleChange} value={formData.deadline || ''} />
+						Description
+						<br />
+						<textarea 
+							name="description" 
+							onChange={handleChange} 
+							value={formData.description || ''} 
+						/>
 					</label>
-				</fieldset><br />
-				<button className="form-btn" type="submit" disabled={formData.name == undefined || formData.name == '' || submitting || (formData.deadline && PastDate(formData.deadline))}>Submit</button>
+					<br />
+					<label>
+						Deadline
+						<br />
+						{formData.deadline && PastDate(formData.deadline) && (
+							<div className="red-text">This deadline is in the past!</div>
+						)}
+						<input 
+							type="date" 
+							name="deadline" 
+							onChange={handleChange} 
+							value={formData.deadline || ''} 
+						/>
+					</label>
+				</fieldset>
+				<br />
+				<button 
+					className="form-btn" 
+					type="submit" 
+					disabled={
+						formData.name === undefined || 
+						formData.name === '' || 
+						submitting || 
+						(formData.deadline && PastDate(formData.deadline))
+					}
+				>
+					Submit
+				</button>
 				<button 
 					disabled={submitting} 
 					type="button"
-					onClick={()=>{
+					onClick={() => {
 						setFormData({
 							reset: true
-						});}
-					}>Clear
+						});
+					}}
+				>
+					Clear
 				</button>
 			</form>
 		</div>

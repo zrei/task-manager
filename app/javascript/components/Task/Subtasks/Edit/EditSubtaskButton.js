@@ -20,10 +20,20 @@ const EditSubtaskButton = (props) => {
 	};
 	return (
 		<div className="task-buttons">
-			<Button variant="info" onClick={setModalIsOpenToTrue}>Edit Subtask</Button>
+			<Button variant="info" onClick={setModalIsOpenToTrue}>
+				Edit Subtask
+			</Button>
 			<Modal isOpen={modalIsOpen}>
-				<Button variant="primary" onClick={setModalIsOpenToFalse}>Close</Button>
-				<EditSubtaskForm modalAction={setModalIsOpenToFalse} subtasks={subtasks} setSubtasks={setSubtasks} attributes={attributes} id={id}/>
+				<Button variant="primary" onClick={setModalIsOpenToFalse}>
+					Close
+				</Button>
+				<EditSubtaskForm 
+					modalAction={setModalIsOpenToFalse} 
+					subtasks={subtasks} 
+					setSubtasks={setSubtasks} 
+					attributes={attributes} 
+					id={id}
+				/>
 			</Modal>
 		</div>
 	);

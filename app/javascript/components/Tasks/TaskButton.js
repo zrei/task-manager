@@ -17,7 +17,12 @@ const TaskButton = (props) => {
 	}
 	return (
 		<div className="d-grid gap-2">
-  			<Button variant="primary" size="lg" className="custom-btn" onClick={() => navigate(url)}>
+  			<Button 
+  				variant="primary" 
+  				size="lg" 
+  				className="custom-btn" 
+  				onClick={() => navigate(url)}
+  			>
     			<span className="tasktitle">{namechange}</span>
     			<ul>
     				{deadline != null && <li>Deadline: {ConvertDeadline(deadline)}</li>}

@@ -10,7 +10,9 @@ const NotFound = () => {
 		<div className="not-found-box">
 			<h1>Sorry!</h1>
 			<p>What you were looking for could not be found.</p>
-			<Button variant="primary" onClick={() => navigate('/')}>Home</Button>
+			<Button variant="primary" onClick={() => navigate('/')}>
+				Home
+			</Button>
 		</div>
 	);
 };

@@ -16,10 +16,20 @@ const Footer = (props) => {
 	const setTask = props.setTask;
 	return (
 		<div className="Footer">
-			<Button className="home-button" variant="success" onClick={() => navigate('/')}>Home</Button>
-			<NewSubtaskButton task_id={task_id} subtasks={subtasks} setSubtasks={setSubtasks}/>
-			<EditTaskButton task={task} setTask={setTask}/>
-			<DeleteTaskButton attributes={task.attributes}/>
+			<Button 
+				className="home-button" 
+				variant="success" 
+				onClick={() => navigate('/')}
+			>
+				Home
+			</Button>
+			<NewSubtaskButton 
+				task_id={task_id} 
+				subtasks={subtasks} 
+				setSubtasks={setSubtasks}
+			/>
+			<EditTaskButton task={task} setTask={setTask} />
+			<DeleteTaskButton attributes={task.attributes} />
 		</div>
 	);
 };
