@@ -5,7 +5,7 @@ class CreateSubtasks < ActiveRecord::Migration[6.1]
       t.text :description
       t.date :deadline
       t.belongs_to :task, null: false, foreign_key: true
-
+      
       t.timestamps
     end
   end

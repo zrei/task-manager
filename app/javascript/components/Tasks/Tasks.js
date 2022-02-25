@@ -2,14 +2,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import TaskButton from './TaskButton';
-import NewTaskForm from './NewTaskForm';
 import { useNavigate } from 'react-router-dom';
 import './Tasks.css';
+import Actions from './Actions/Actions.js';
 
 const Tasks = () => {
 	let navigate = useNavigate();
 	const [loading, setLoading] = useState(true);
 	const [tasks, setTasks] = useState([]);
+	const [sort, setSort] = useState("deadline");
 	const current = new Date();
 	const date = "Today's Date: " + `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
 
@@ -31,7 +32,7 @@ const Tasks = () => {
 	let tasksWithDeadline = tasks.filter(
 		(task) => task.attributes.deadline != null
 	);
-	let sortedTasks = tasksWithDeadline.sort(
+	let sortedTasksByDeadline = tasksWithDeadline.sort(
 		(a, b) => 
 			new Date(...a.attributes.deadline.split('/').reverse()) - new Date(...b.attributes.deadline.split('/').reverse())
 	);
@@ -40,10 +41,16 @@ const Tasks = () => {
 		(task) => task.attributes.deadline == null
 	);
 
+	let sortedTasksByName = tasks.sort(
+		(a, b) =>
+			a.attributes.name.localeCompare(b.attributes.name)
+	);
+
   	const withDeadlineTaskDisplay = 
-  		sortedTasks && 
+  		sortedTasksByDeadline && 
   		!loading && 
-  		sortedTasks.map((task, index) => {
+  		sort == "deadline" &&
+  		sortedTasksByDeadline.map((task, index) => {
 	  		return (
 	  			<TaskButton 
 	  				key={index}
@@ -56,6 +63,7 @@ const Tasks = () => {
   	const withoutDeadlineTaskDisplay = 
   		tasksWithoutDeadline && 
   		!loading && 
+  		sort == "deadline" &&
   		tasksWithoutDeadline.map((task, index) => {
 	  		return (
 	  			<TaskButton 
@@ -65,6 +73,21 @@ const Tasks = () => {
 	  			/>
 	  		);
   	});
+
+  	const SortByNameDisplay = 
+  		sortedTasksByName && 
+  		!loading && 
+  		sort == "name" &&
+  		sortedTasksByName.map((task, index) => {
+	  		return (
+	  			<TaskButton 
+	  				key={index}
+	  				attributes={task.attributes}
+	  				numsubtasks={task.relationships.subtasks.data.length}
+	  			/>
+	  		);
+  	});
+
 
 
 	return (
@@ -85,10 +108,11 @@ const Tasks = () => {
 					<h2>Remaining Tasks</h2>
 					{withDeadlineTaskDisplay}
 					{withoutDeadlineTaskDisplay}
+					{SortByNameDisplay}
 				</div>
 			</div>
 			<div className="Column-2">
-				<NewTaskForm tasks={tasks} />
+				<Actions tasks={tasks} setSort={setSort}/>
 			</div>
 		</div>
 	);

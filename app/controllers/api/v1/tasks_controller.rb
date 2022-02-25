@@ -48,7 +48,7 @@ module Api
       private 
 
       def task_params
-        params.require(:task).permit(:name, :description, :deadline)
+        params.require(:task).permit(:name, :tag, :description, :deadline)
       end 
 
       def options

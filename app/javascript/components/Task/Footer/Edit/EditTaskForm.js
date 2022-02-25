@@ -8,6 +8,7 @@ const formReducer = (state, event) => {
 	if (event.reset) {
 		return {
 			name: event.task.name,
+			tag: event.task.tag,
 			description: event.task.description,
 			deadline: event.task.deadline,
 		};
@@ -15,6 +16,7 @@ const formReducer = (state, event) => {
 	if (event.clear) {
 		return {
 			name: '',
+			tag: '',
 			description: '',
 			deadline: ''
 		};
@@ -32,6 +34,7 @@ const EditTaskForm = (props) => {
 	const modalAction = props.modalAction;
 	const [formData, setFormData] = useReducer(formReducer, {
 		name: task.attributes.name,
+		tag: task.attributes.tag,
 		description: task.attributes.description,
 		deadline: task.attributes.deadline
 	});
@@ -45,6 +48,7 @@ const EditTaskForm = (props) => {
 		axios
 			.patch(url, {
 				name: formData.name, 
+				tag: formData.tag,
 				description: formData.description ? formData.description : null, 
 				deadline: formData.deadline ? formData.deadline : null
 			})
@@ -56,6 +60,7 @@ const EditTaskForm = (props) => {
        				reset: true,
        				task: {
        					name: formData.name,
+       					tag: formData.tag,
        					description: formData.description,
        					deadline: formData.deadline
        				}
@@ -93,6 +98,21 @@ const EditTaskForm = (props) => {
 							value={formData.name || ''} 
 						/>
 					</label>
+					<br />
+					<label>
+						Category <span className="red-text">*</span>
+						<br />
+						<select
+							name="tag"
+							onChange={handleChange}
+							value={formData.tag || ''}
+						>
+							<option value="">--</option>
+							<option value="School">School</option>
+							<option value="Work">Work</option>
+							<option value="Personal">Personal</option>
+						</select>
+					</label>
 				</fieldset>
 				<br />
 				<fieldset 
@@ -126,7 +146,8 @@ const EditTaskForm = (props) => {
 					className="form-btn" 
 					type="submit" 
 					disabled={
-						formData.name === undefined || formData.name === '' || submitting
+						formData.name === undefined || formData.name === '' || submitting ||
+						formData.tag === undefined || formData.tag === ''
 					}
 				>
 					Submit
@@ -140,6 +161,7 @@ const EditTaskForm = (props) => {
 							reset: true,
 							task: {
 								name: task.attributes.name,
+								tag: task.attributes.tag,
 								description: task.attributes.description,
 								deadline: task.attributes.deadline
 							}

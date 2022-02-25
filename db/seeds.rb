@@ -7,19 +7,23 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 tasks = Task.create([
   { 
-    name: "Task 1",
+    name: "Homework",
+    tag: "School",
     description: "No subtasks, just a description and a deadline.",
-    deadline: "2022-02-16"
+    deadline: "2022-03-16"
   }, 
   { 
-    name: "Task 2",
+    name: "Oral Presentation",
+    tag: "School"
   },
   { 
-    name: "Task 3",
+    name: "Task Report",
+    tag: "Work",
     deadline: "2021-12-14"
   }, 
   { 
-    name: "Task 4",
+    name: "Mother's Day Gift",
+    tag: "Personal",
     description: "Showing off the sorting.",
     deadline: "2022-05-19"
   }
@@ -33,12 +37,12 @@ subtasks = Subtask.create([
   },
   { 
     name: "Another subtask", 
-    deadline: "2022-02-07",
+    deadline: "2022-03-07",
     task: tasks.second
   },
   { 
     name: "Just showing off more sorting",
-    deadline: "2022-02-07",
+    deadline: "2022-03-07",
     task: tasks.fourth
   },
   {

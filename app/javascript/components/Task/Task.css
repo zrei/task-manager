@@ -1,6 +1,6 @@
 
-.header {
-	height: 130px;
+.Header-Task-Page {
+	height: 150px;
 	overflow: auto;
 	margin: 0 0 0 0;
 	border-bottom: 2px solid #cfcfcf;
@@ -34,7 +34,7 @@
 }
 
 .subtaskContainer {
-	height: 600px;
+	height: 580px;
 	margin: 0 0 0 0;
 	overflow-y: auto;
 	padding-left: 10px;

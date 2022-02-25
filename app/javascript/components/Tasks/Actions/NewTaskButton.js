@@ -2,12 +2,11 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-modal';
-import EditTaskForm from './EditTaskForm';
-import '../../Task.css';
+import NewTaskForm from './NewTaskForm';
+import '../Tasks.css';
 
-const EditTaskButton = (props) => {
-	const task = props.task;
-	const setTask = props.setTask;
+const NewTaskButton = (props) => {
+	const tasks = props.tasks;
 	Modal.setAppElement('body');
 	const [modalIsOpen, setModalIsOpen] = useState(false);
 	const setModalIsOpenToTrue = () => {
@@ -18,21 +17,20 @@ const EditTaskButton = (props) => {
 	};
 	return (
 		<div className="task-buttons">
-			<Button variant="warning" onClick={setModalIsOpenToTrue}>
-				Edit Task
+			<Button variant="success" onClick={setModalIsOpenToTrue}>
+				Add New Task
 			</Button>
 			<Modal isOpen={modalIsOpen}>
 				<Button variant="primary" onClick={setModalIsOpenToFalse}>
 					Close
 				</Button>
-				<EditTaskForm 
+				<NewTaskForm 
 					modalAction={setModalIsOpenToFalse} 
-					task={task} 
-					setTask={setTask}
+					tasks={tasks}
 				/>
 			</Modal>
 		</div>
 	);
 };
 
-export default EditTaskButton;
+export default NewTaskButton;

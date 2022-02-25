@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_27_095555) do
+ActiveRecord::Schema.define(version: 2022_02_23_151356) do
 
   create_table "subtasks", force: :cascade do |t|
     t.string "name"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2021_12_27_095555) do
 
   create_table "tasks", force: :cascade do |t|
     t.string "name"
+    t.string "tag"
     t.text "description"
     t.date "deadline"
     t.datetime "created_at", precision: 6, null: false

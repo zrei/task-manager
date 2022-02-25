@@ -2,13 +2,14 @@
 import React, { useReducer, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './Tasks.css';
-import PastDate from '../Functions/PastDate';
+import '../Tasks.css';
+import PastDate from '../../Functions/PastDate';
 
 const formReducer = (state, event) => {
 	if (event.reset) {
 		return {
 			name: '',
+			tag: '',
 			description: '',
 			deadline: ''
 		};
@@ -24,19 +25,21 @@ const NewTaskForm = (props) => {
 	const tasks = props.tasks;
 	const [formData, setFormData] = useReducer(formReducer, {});
 	const [submitting, setSubmitting] = useState(false);
-	
+	const modalAction = props.modalAction;
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		setSubmitting(true);
 		axios
 			.post('/api/v1/tasks', {
 				name: formData.name, 
+				tag: formData.tag,
 				description: formData.description ? formData.description : null, 
 				deadline: formData.deadline ? formData.deadline : null
 			})
 	  		.then((resp) => {
 	  			const slug = resp.data.data.attributes.slug;
 	  			const url = '/task/' + slug;
+	  			modalAction();
 	  			navigate(url);
 	  		})
 	  		.catch((resp) => { 
@@ -79,6 +82,21 @@ const NewTaskForm = (props) => {
 							value={formData.name || ''} 
 						/>
 					</label>
+					<br />
+					<label>
+						Category <span className="red-text">*</span>
+						<br />
+						<select 
+							name="tag"
+							onChange={handleChange}
+							value={formData.tag || ''}
+						>
+							<option value="">--</option>
+							<option value="School">School</option>
+							<option value="Work">Work</option>
+							<option value="Personal">Personal</option>
+						</select>
+					</label>
 				</fieldset>
 				<br />
 				<fieldset 
@@ -117,6 +135,8 @@ const NewTaskForm = (props) => {
 					disabled={
 						formData.name === undefined || 
 						formData.name === '' || 
+						formData.tag === undefined ||
+						formData.tag === '' ||
 						submitting || 
 						(formData.deadline && PastDate(formData.deadline)) || 
 						(formData.name && 

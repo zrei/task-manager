@@ -14,6 +14,8 @@ const Footer = (props) => {
 	const setSubtasks = props.setSubtasks;
 	const task = props.task;
 	const setTask = props.setTask;
+	const category = props.category;
+	const categoryUrl = "/category/" + category;
 	return (
 		<div className="Footer">
 			<Button 
@@ -22,6 +24,13 @@ const Footer = (props) => {
 				onClick={() => navigate('/')}
 			>
 				Home
+			</Button>
+			<Button 
+				className="task-buttons"
+				variant="info"
+				onClick={() => navigate(categoryUrl)}
+			>
+				Cateogry: {category}
 			</Button>
 			<NewSubtaskButton 
 				task_id={task_id} 

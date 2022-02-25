@@ -95,6 +95,7 @@ const Task = () => {
 					setSubtasks={setSubtasks} 
 					task={task} 
 					setTask={setTask}
+					category={task.attributes.tag}
 				/>
 			)}
 		</div>
